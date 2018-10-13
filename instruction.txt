@@ -21,7 +21,7 @@ Demo1: VueJS on kubernetes
 0. Clone workshop to your local machine by command: git clone git@github.com:praparn/CodeMania2018.git
 
 1. Access to path of demo1 folder (./CodeMania2018/Demo1_VueJS) by command:
-$ cd ./CodeMania2018/Demo1_VueJS
+$ cd ./CodeMania2018/Demo_VueJS
 
 2. Start kubernetes development environment with command: "devspace up" and following answer below:
 ************************************************************************************************************
@@ -107,3 +107,104 @@ root@vuejs3-fdcf699d5-vvt5l:/app# vue ui
 13. Check result on kubernetes server (pods)
 
 14. Remove all environment on kubernetes by command: devspace reset
+
+
+
+===========================================================================================================
+Demo2: Python on kubernetes
+
+0. Copy source file for python to target
+$ cd ./CodeMania2018/Demo_Python
+$ cp ../Resource/Dockerfile ./
+$ cp ../Resource/mainlite.py ./
+$ cp ../Resource/requirementslite.txt ./
+
+1. Access to path of demo1 folder (./CodeMania2018/Demo1_VueJS) by command:
+$ cd ./CodeMania2018/Demo_VueJS
+
+2. Start kubernetes development environment with command: "devspace up" and following answer below:
+
+************************************************************************************************************
+What is the major programming language of your project?
+Supported languages: csharp, go, java, javascript, none, php, python, ruby, typescript
+Press ENTER to use: python
+> python
+
+Do you want to use your existing $HOME/.kube/config for Kubernetes access? (yes | no)
+Press ENTER to use: yes
+> 
+
+What is the name of your application?
+Press ENTER to use: devspace
+> 
+
+Which port(s) does your application listen on? (separated by spaces)
+> ^C
+praparns-MacBook-Pro% devspace up   
+Do you want to overwrite the existing files in /chart? (yes | no)
+Press ENTER to use: no
+> yes
+
+What is the major programming language of your project?
+Supported languages: csharp, go, java, javascript, none, php, python, ruby, typescript
+Press ENTER to use: python
+> python
+
+[FATAL]  Error while creating Helm chart and Dockerfile: Language Template not found
+praparns-MacBook-Pro% devspace up
+What is the major programming language of your project?
+Supported languages: csharp, go, java, javascript, none, php, python, ruby, typescript
+Press ENTER to use: python
+> python
+
+Do you want to use your existing $HOME/.kube/config for Kubernetes access? (yes | no)
+Press ENTER to use: yes
+> 
+
+What is the name of your application?
+Press ENTER to use: devspace
+> python
+
+Which port(s) does your application listen on? (separated by spaces)
+> 5000
+
+Which Kubernetes namespace should your application run in?
+Press ENTER to use: default
+> python
+
+Which Kubernetes namespace should your tiller server run in?
+Press ENTER to use: python
+> 
+
+Should we create a private registry within your Kubernetes cluster for you? (yes | no)
+Press ENTER to use: no
+> 
+
+Which registry do you want to push to? ('hub.docker.com' or URL)
+Press ENTER to use: hub.docker.com
+> 
+
+Which image name do you want to use on Docker Hub?
+Press ENTER to use: labdocker/python
+> 
+
+[WARN]   Unable to check permissions: If you run into errors, please create the ClusterRoleBinding 'devspace-users' as described here: https://devspace.covexo.com/docs/advanced/rbac.html
+[DONE] √ Tiller started                     
+[DONE] √ Initialized helm client                      
+[INFO]   Building image 'default' with engine 'docker'
+[DONE] √ Authentication successful (hub.docker.com)
+************************************************************************************************************
+
+3. Install python component as need by command:
+$ pip install --no-cache-dir -r requirementslite.txt
+
+4. Start Python by command:
+$ python mainlite.py
+
+5. Test Edit file mainlite.py and refresh browser
+
+6. Check result on hub.docker.com
+
+7. Check result on kubernetes server (pods)
+
+8. Remove all environment on kubernetes by command: devspace reset
