@@ -1,0 +1,109 @@
+Instruction File:
+===========================================================================================================
+Prerequiste:
+    1. Kubernetes development server will readiness and up
+    2. Configure credential for access kubernetes server
+    3. Reference to github "covexo/devspace" for install binary (https://github.com/covexo/devspace/blob/master/README.md)
+        For Mac OS:
+            curl -s -H "Accept: application/json"  "https://api.github.com/repos/covexo/devspace/releases/latest"  | sed -nE 's!.*"(https://github.com[^"]*devspace-darwin-amd64)".*!\1!p' | xargs -n 1 curl -L -o devspace && chmod +x devspace && sudo mv devspace /usr/local/bin
+
+        For Windows OS: (Administrator Right)
+            curl -s "https://raw.githubusercontent.com/covexo/devspace/master/scripts/installer-win.bat" >"%Temp%\install-devspace.bat" "%Temp%\install-devspace.bat" "%PROGRAMFILES%\devspace" del "%Temp%\install-devspace.bat"
+
+        For Linux OS:
+            curl --silent "https://api.github.com/repos/covexo/devspace/releases/latest" | sed -nE 's!.*"(https://github.com[^"]*devspace-linux-amd64)".*!\1!p' | xargs -n 1 curl -L -o devspace && chmod +x devspace && sudo mv devspace /usr/local/bin
+
+    4. On developer machine was installed docker with login to your account on hub.docker.com (docker login)
+
+===========================================================================================================
+Demo1: VueJS on kubernetes
+
+0. Clone workshop to your local machine by command: git clone git@github.com:praparn/CodeMania2018.git
+
+1. Access to path of demo1 folder (./CodeMania2018/Demo1_VueJS) by command:
+$ cd ./CodeMania2018/Demo1_VueJS
+
+2. Start kubernetes development environment with command: "devspace up" and following answer below:
+************************************************************************************************************
+$ devspace up
+What is the major programming language of your project?
+Supported languages: csharp, go, java, javascript, none, php, python, ruby, typescript
+Press ENTER to use: none
+> javascript
+
+Do you want to use your existing $HOME/.kube/config for Kubernetes access? (yes | no)
+Press ENTER to use: yes
+> 
+
+What is the name of your application?
+Press ENTER to use: devspace
+> vuejs3
+
+Which port(s) does your application listen on? (separated by spaces)
+> 8080 8000
+
+Which Kubernetes namespace should your application run in?
+Press ENTER to use: default
+> vuejs3
+
+Which Kubernetes namespace should your tiller server run in?
+Press ENTER to use: vuejs3
+> 
+
+Should we create a private registry within your Kubernetes cluster for you? (yes | no)
+Press ENTER to use: no
+> 
+
+Which registry do you want to push to? ('hub.docker.com' or URL)
+Press ENTER to use: hub.docker.com
+> 
+
+Which image name do you want to use on Docker Hub?
+Press ENTER to use: labdocker/vuejs3
+> 
+************************************************************************************************************
+
+3. Install and create project Vuejs3.0.5 name "codemania2018" by command below: 
+$ npm install -g @vue/cli
+$ vue --version
+$ vue create codemania2018
+
+4. From Vue CLI 3.0.5, Select default ==> npm
+Vue CLI v3.0.5
+? Please pick a preset: default (babel, eslint)
+? Pick the package manager to use when installing dependencies: NPM
+
+5. Access to folder "codemania2018" and start vuejs by command: 
+$ cd codemania2018
+$ npm run serve
+
+6. Open vuejs web page on browser: http://localhost:8080
+
+7. Test change picture / file realtime: (App.vue, logo.png)
+
+8. Open secondary terminal to access devspace on folder ((./CodeMania2018/Demo1_VueJS) by command:
+$ devspace list port    ==> check port mapping between localhost machine <==> kubernetes machine
+$ devspace list sync    ==> check sync folder
+
+9. Access to pods on kubernetes farm via command: devspace enter and check vue version by command:
+$ devspace enter
+$ vue --version
+
+10. Start Vue-GUI by command:
+$ vue ui
+************************************************************************************************************
+Result:
+root@vuejs3-fdcf699d5-vvt5l:/app# vue --version
+3.0.5
+root@vuejs3-fdcf699d5-vvt5l:/app# vue ui
+🚀  Starting GUI...
+🌠  Ready on http://localhost:8000
+************************************************************************************************************
+
+11. Add existing project "codemania2018" and check component by menu "Import" > ./app/codemania2018
+
+12. Check result on hub.docker.com
+
+13. Check result on kubernetes server (pods)
+
+14. Remove all environment on kubernetes by command: devspace reset
