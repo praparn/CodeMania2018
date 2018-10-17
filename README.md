@@ -1,4 +1,4 @@
-# CodeMania2018: Make seamless development on cloud with kubernete
+# CodeMania2018: Make seamless development on cloud with kubernetes
 
 Reference tool from "devspace" :https://github.com/covexo/devspace/blob/master/README.md
 
