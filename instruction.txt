@@ -23,73 +23,67 @@ Demo1: VueJS on kubernetes
 1. Access to path of demo1 folder (./CodeMania2018/Demo1_VueJS) by command:
 $ cd ./CodeMania2018/Demo_VueJS
 
-2. Start kubernetes development environment with command: "devspace up" and following answer below:
+2. Initial kubernetes development environment with command: "devspace init" and following answer below:
 ************************************************************************************************************
-$ devspace up
 What is the major programming language of your project?
 Supported languages: csharp, go, java, javascript, none, php, python, ruby, typescript
 Press ENTER to use: none
 > javascript
 
-Do you want to use your existing $HOME/.kube/config for Kubernetes access? (yes | no)
+Do you want to use the DevSpace Cloud? (free ready-to-use Kubernetes) (yes | no)
 Press ENTER to use: yes
-> 
-
-What is the name of your application?
-Press ENTER to use: devspace
-> vuejs3
-
-Which port(s) does your application listen on? (separated by spaces)
-> 8080 8000
+> no
 
 Which Kubernetes namespace should your application run in?
 Press ENTER to use: default
-> vuejs3
-
-Which Kubernetes namespace should your tiller server run in?
-Press ENTER to use: vuejs3
-> 
-
-Should we create a private registry within your Kubernetes cluster for you? (yes | no)
-Press ENTER to use: no
-> 
+> vuejs
 
 Which registry do you want to push to? ('hub.docker.com' or URL)
 Press ENTER to use: hub.docker.com
 > 
 
 Which image name do you want to use on Docker Hub?
-Press ENTER to use: labdocker/vuejs3
+Press ENTER to use: labdocker/devspace
+> labdocker/vuejs3
+
+Do you want to create a pull secret automatically for this image? (yes | no)
+Press ENTER to use: yes
 > 
 ************************************************************************************************************
 
-3. Install and create project Vuejs3.0.5 name "codemania2018" by command below: 
+3. Add port for connect with kubernetes by command below:
+    devspace add port 8080
+    devspace add port 8000
+
+4. Start build kubernetes environment by command: "devspace up"
+
+5. Install and create project Vuejs3.0.5 name "codemania2018" by command below: 
 $ npm install -g @vue/cli
 $ vue --version
 $ vue create codemania2018
 
-4. From Vue CLI 3.0.5, Select default ==> npm
-Vue CLI v3.0.5
+6. From Vue CLI 3.1.1, Select default ==> npm
+Vue CLI v3.1.1
 ? Please pick a preset: default (babel, eslint)
 ? Pick the package manager to use when installing dependencies: NPM
 
-5. Access to folder "codemania2018" and start vuejs by command: 
+7. Access to folder "codemania2018" and start vuejs by command: 
 $ cd codemania2018
 $ npm run serve
 
-6. Open vuejs web page on browser: http://localhost:8080
+8. Open vuejs web page on browser: http://localhost:8080
 
-7. Test change picture / file realtime: (App.vue, logo.png)
+9. Test change picture / file realtime: (App.vue, logo.png)
 
-8. Open secondary terminal to access devspace on folder ((./CodeMania2018/Demo1_VueJS) by command:
+10. Open secondary terminal to access devspace on folder ((./CodeMania2018/Demo1_VueJS) by command:
 $ devspace list port    ==> check port mapping between localhost machine <==> kubernetes machine
 $ devspace list sync    ==> check sync folder
 
-9. Access to pods on kubernetes farm via command: devspace enter and check vue version by command:
+11. Access to pods on kubernetes farm via command: devspace enter and check vue version by command:
 $ devspace enter
 $ vue --version
 
-10. Start Vue-GUI by command:
+12. Start Vue-GUI by command:
 $ vue ui
 ************************************************************************************************************
 Result:
@@ -100,13 +94,13 @@ root@vuejs3-fdcf699d5-vvt5l:/app# vue ui
 🌠  Ready on http://localhost:8000
 ************************************************************************************************************
 
-11. Add existing project "codemania2018" and check component by menu "Import" > ./app/codemania2018
+13. Add existing project "codemania2018" and check component by menu "Import" > ./app/codemania2018
 
-12. Check result on hub.docker.com
+14. Check result on hub.docker.com
 
-13. Check result on kubernetes server (pods)
+15. Check result on kubernetes server (pods)
 
-14. Remove all environment on kubernetes by command: devspace reset
+16. Remove all environment on kubernetes by command: devspace reset
 
 
 
@@ -114,97 +108,53 @@ root@vuejs3-fdcf699d5-vvt5l:/app# vue ui
 Demo2: Python on kubernetes
 
 0. Copy source file for python to target
+    cd ./CodeMania2018/Demo_Python
+    cp ../Resource/Dockerfile ./
+    cp ../Resource/mainlite.py ./
+    cp ../Resource/requirementslite.txt ./
+
+1. Access to path of demo1 folder (./CodeMania2018/Demo_Python) by command:
 $ cd ./CodeMania2018/Demo_Python
-$ cp ../Resource/Dockerfile ./
-$ cp ../Resource/mainlite.py ./
-$ cp ../Resource/requirementslite.txt ./
 
-1. Access to path of demo1 folder (./CodeMania2018/Demo1_VueJS) by command:
-$ cd ./CodeMania2018/Demo_VueJS
-
-2. Start kubernetes development environment with command: "devspace up" and following answer below:
-
+2. Init kubernetes development environment with command: "devspace init" and following answer below:
 ************************************************************************************************************
 What is the major programming language of your project?
 Supported languages: csharp, go, java, javascript, none, php, python, ruby, typescript
 Press ENTER to use: python
 > python
 
-Do you want to use your existing $HOME/.kube/config for Kubernetes access? (yes | no)
+Do you want to use the DevSpace Cloud? (free ready-to-use Kubernetes) (yes | no)
 Press ENTER to use: yes
-> 
-
-What is the name of your application?
-Press ENTER to use: devspace
-> 
-
-Which port(s) does your application listen on? (separated by spaces)
-> ^C
-praparns-MacBook-Pro% devspace up   
-Do you want to overwrite the existing files in /chart? (yes | no)
-Press ENTER to use: no
-> yes
-
-What is the major programming language of your project?
-Supported languages: csharp, go, java, javascript, none, php, python, ruby, typescript
-Press ENTER to use: python
-> python
-
-[FATAL]  Error while creating Helm chart and Dockerfile: Language Template not found
-praparns-MacBook-Pro% devspace up
-What is the major programming language of your project?
-Supported languages: csharp, go, java, javascript, none, php, python, ruby, typescript
-Press ENTER to use: python
-> python
-
-Do you want to use your existing $HOME/.kube/config for Kubernetes access? (yes | no)
-Press ENTER to use: yes
-> 
-
-What is the name of your application?
-Press ENTER to use: devspace
-> python
-
-Which port(s) does your application listen on? (separated by spaces)
-> 5000
+> no
 
 Which Kubernetes namespace should your application run in?
 Press ENTER to use: default
 > python
-
-Which Kubernetes namespace should your tiller server run in?
-Press ENTER to use: python
-> 
-
-Should we create a private registry within your Kubernetes cluster for you? (yes | no)
-Press ENTER to use: no
-> 
 
 Which registry do you want to push to? ('hub.docker.com' or URL)
 Press ENTER to use: hub.docker.com
 > 
 
 Which image name do you want to use on Docker Hub?
-Press ENTER to use: labdocker/python
+Press ENTER to use: labdocker/devspace
+> labdocker/python
+
+Do you want to create a pull secret automatically for this image? (yes | no)
+Press ENTER to use: yes
 > 
-
-[WARN]   Unable to check permissions: If you run into errors, please create the ClusterRoleBinding 'devspace-users' as described here: https://devspace.covexo.com/docs/advanced/rbac.html
-[DONE] √ Tiller started                     
-[DONE] √ Initialized helm client                      
-[INFO]   Building image 'default' with engine 'docker'
-[DONE] √ Authentication successful (hub.docker.com)
 ************************************************************************************************************
+3. Start build kubernetes environment by command: "devspace up"
 
-3. Install python component as need by command:
+4. Install python component as need by command:
 $ pip install --no-cache-dir -r requirementslite.txt
 
-4. Start Python by command:
+5. Start Python by command:
 $ python mainlite.py
 
-5. Test Edit file mainlite.py and refresh browser
+6. Test Edit file mainlite.py and refresh browser
 
-6. Check result on hub.docker.com
+7. Check result on hub.docker.com
 
-7. Check result on kubernetes server (pods)
+8. Check result on kubernetes server (pods)
 
-8. Remove all environment on kubernetes by command: devspace reset
+9. Remove all environment on kubernetes by command: devspace reset
