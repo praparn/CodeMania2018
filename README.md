@@ -11,6 +11,6 @@ debug efficiently with port forwarding and terminal proxying
 migrate to Docker & Kubernetes within minutes
 
 
-Demo for Vuejs integrated with Kubernetes sync: https://youtu.be/bBY-0NZ8n98
+Demo for Vuejs integrated with Kubernetes sync: https://youtu.be/Yw3bcBT7gNI
 
-Demo for Python integrated with Kubernets sync: https://youtu.be/KWPl9cdHPF4
+Demo for Python integrated with Kubernets sync: https://youtu.be/maz5Iwqd-sM
